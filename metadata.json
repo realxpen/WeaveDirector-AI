@@ -1,0 +1,5 @@
+{
+  "name": "WeaveDirector",
+  "description": "Live multimodal AI creative director powered by Gemini.",
+  "requestFramePermissions": []
+}
