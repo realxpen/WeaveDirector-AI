@@ -1,9 +1,13 @@
+"use client"
+
 import Link from "next/link"
 import { Layers3, LayoutTemplate, PlayCircle, Sparkles } from "lucide-react"
+import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { getSession } from "@/lib/auth"
 
 const features = [
   {
@@ -27,6 +31,12 @@ const features = [
 ]
 
 export default function HomePage() {
+  const [signedIn, setSignedIn] = useState(false)
+
+  useEffect(() => {
+    setSignedIn(Boolean(getSession()))
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#04060d] text-zinc-100">
       <header className="border-b border-indigo-200/10 bg-[#050914]/70 backdrop-blur-xl">
@@ -47,16 +57,33 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/signin">
-              <Button variant="ghost" size="sm" className="h-7 text-xs">
-                Sign In
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button variant="primary" size="sm" className="h-7 text-xs">
-                Get Started
-              </Button>
-            </Link>
+            {signedIn ? (
+              <>
+                <Link href="/settings/profile">
+                  <Button variant="ghost" size="sm" className="h-7 text-xs">
+                    Profile
+                  </Button>
+                </Link>
+                <Link href="/studio">
+                  <Button variant="primary" size="sm" className="h-7 text-xs">
+                    Open Studio
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/signin">
+                  <Button variant="ghost" size="sm" className="h-7 text-xs">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button variant="primary" size="sm" className="h-7 text-xs">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -143,4 +170,3 @@ export default function HomePage() {
     </div>
   )
 }
-

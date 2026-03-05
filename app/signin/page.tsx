@@ -3,14 +3,16 @@
 import Link from "next/link"
 import { ArrowLeft, Github, Mail } from "lucide-react"
 import { FormEvent, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { signInLocal } from "@/lib/auth"
 
 export default function SignInPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -22,18 +24,9 @@ export default function SignInPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL ?? ""}/api/auth/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      })
-
-      if (!res.ok) {
-        const message = await res.text()
-        throw new Error(message || "Sign in failed")
-      }
-
-      router.push("/studio")
+      signInLocal(email, password)
+      const redirect = searchParams.get("redirect")
+      router.push(redirect && redirect.startsWith("/") ? redirect : "/studio")
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign in failed")
     } finally {
@@ -114,4 +107,3 @@ export default function SignInPage() {
     </div>
   )
 }
-

@@ -69,7 +69,6 @@ export default function SessionDetailPage() {
           <nav className="space-y-1 px-2 py-3 text-xs">
             <Link href="/studio"><Button variant="ghost" size="sm" className="w-full justify-start">New Campaign</Button></Link>
             <Link href="/sessions"><Button variant="secondary" size="sm" className="w-full justify-start">Sessions</Button></Link>
-            <Link href="/story-mode"><Button variant="ghost" size="sm" className="w-full justify-start">Story Mode</Button></Link>
           </nav>
           <div className="mt-auto space-y-1 border-t border-indigo-200/10 p-2">
             <Link href="/settings">

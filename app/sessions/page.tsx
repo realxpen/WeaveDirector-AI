@@ -61,9 +61,6 @@ export default function SessionsPage() {
               <Button variant="ghost" size="sm" className="w-full justify-start">New Campaign</Button>
             </Link>
             <Button variant="secondary" size="sm" className="w-full justify-start">Sessions</Button>
-            <Link href="/story-mode">
-              <Button variant="ghost" size="sm" className="w-full justify-start">Story Mode</Button>
-            </Link>
           </nav>
           <div className="mt-auto space-y-1 border-t border-indigo-200/10 p-2">
             <Link href="/settings">

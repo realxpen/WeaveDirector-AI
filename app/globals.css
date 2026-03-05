@@ -40,6 +40,42 @@ body {
   color: var(--text);
 }
 
+html[data-resolved-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-resolved-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f6ff;
+  --bg-soft: #e9eefb;
+  --panel: rgba(255, 255, 255, 0.85);
+  --panel-strong: rgba(255, 255, 255, 0.96);
+  --line: rgba(65, 87, 170, 0.24);
+  --text: #13203a;
+  --muted: #4f5f7b;
+  --focus: rgba(58, 113, 255, 0.35);
+}
+
+html[data-resolved-theme="light"] body {
+  background:
+    radial-gradient(circle at 0% -10%, rgba(86, 138, 255, 0.2), transparent 42%),
+    radial-gradient(circle at 100% 0%, rgba(134, 158, 255, 0.18), transparent 45%),
+    var(--bg);
+}
+
+/* Density presets: this is applied globally so UI sizing actually changes. */
+html[data-density="comfortable"] {
+  font-size: 16px;
+}
+
+html[data-density="compact"] {
+  font-size: 14px;
+}
+
+html[data-density="compact"] body {
+  line-height: 1.4;
+}
+
 body {
   font-family: var(--font-sans), "Inter", "Segoe UI", sans-serif;
   min-height: 100vh;

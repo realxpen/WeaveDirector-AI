@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { signUpLocal } from "@/lib/auth"
 
 export default function SignUpPage() {
   const router = useRouter()
@@ -23,18 +24,8 @@ export default function SignUpPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL ?? ""}/api/auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      })
-
-      if (!res.ok) {
-        const message = await res.text()
-        throw new Error(message || "Sign up failed")
-      }
-
-      router.push("/signin")
+      signUpLocal(name, email, password)
+      router.push("/studio")
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign up failed")
     } finally {
